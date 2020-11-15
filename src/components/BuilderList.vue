@@ -8,11 +8,11 @@
       <div class="content-data">
         <hgroup>
           <h3>{{ book.title }}</h3>
-          <img :src="`${book.language}.svg`" :alt="book.language" />
+          <img :src="`./assets/${book.language}.svg`" :alt="book.language" />
         </hgroup>
         <p class="author">{{ book.author }}</p>
         <section>
-          <p>Categories:</p>
+          <p class="categories">Categories:</p>
           <ul>
             <li v-for="category in book.categories" :key="category.catefory_id">
               {{ category.name }}
@@ -54,6 +54,15 @@ p {
 .author {
   font-size: 10px;
   font-style: italic;
+}
+.categories {
+  margin-bottom: 5px;
+}
+ul {
+  margin-top: 0;
+}
+li {
+  font-size: 12px;
 }
 figure {
   width: 20%;
