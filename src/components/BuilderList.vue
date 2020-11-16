@@ -57,6 +57,7 @@ p {
 }
 .categories {
   margin-bottom: 5px;
+  position: relative;
 }
 ul {
   margin-top: 0;
