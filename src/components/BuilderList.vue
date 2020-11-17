@@ -3,7 +3,7 @@
     <article v-for="book in books" :key="book.id">
       <figure>
         <img :src="book.cover" :alt="book.title" />
-        <figurecaption>{{ book.pages }}</figurecaption>
+        <figcaption>{{ book.pages }}</figcaption>
       </figure>
       <div class="content-data">
         <hgroup>
@@ -72,7 +72,7 @@ figure {
 figure img {
   width: 100%;
 }
-figure figurecaption {
+figure figcaption {
   position: absolute;
   bottom: 0;
   right: -5px;
