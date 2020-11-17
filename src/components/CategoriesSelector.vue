@@ -1,7 +1,11 @@
 <template>
   <section>
-    <input v-model="selectedCategory" />
-    <ul v-if="hasFilteredCategories">
+    <input
+      v-model="selectedCategory"
+      @focus="isFocused = !isFocused"
+      @blur="isFocused = !isFocused"
+    />
+    <ul v-if="isFocused">
       <li v-for="category in this.categoryFiltered" :key="category.category_id">
         {{ category.name }}
       </li>
@@ -27,7 +31,8 @@ export default {
   data() {
     return {
       selectedCategory: "",
-      categoryFiltered: [],
+      categoryFiltered: this.categories,
+      isFocused: false,
     };
   },
   watch: {
@@ -42,12 +47,13 @@ export default {
   },
   methods: {
     filterInCategories(input) {
+      console.log(input);
       if (input.length > 0) {
         this.categoryFiltered = this.categories.filter((category) =>
           category.name.toLowerCase().includes(input.toLowerCase())
         );
       } else {
-        this.categoryFiltered = [];
+        this.categoryFiltered = this.categories;
       }
     },
   },
