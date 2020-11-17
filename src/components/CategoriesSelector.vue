@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <input
       v-model="selectedCategory"
       @focus="isFocused = !isFocused"
@@ -10,16 +10,7 @@
         {{ category.name }}
       </li>
     </ul>
-    <select name="categories">
-      <option
-        v-for="category in categories"
-        :key="category.category_id"
-        :value="category.category_id"
-      >
-        {{ category.name }}
-      </option>
-    </select>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -62,4 +53,27 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div {
+  position: relative;
+  z-index: 1;
+  width: 20%;
+}
+ul {
+  position: absolute;
+  background-color: #eee;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+li {
+  color: #666;
+  list-style-type: none;
+  padding: 5px 15px;
+  margin: 0;
+  font-size: 12px;
+}
+li:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
 </style>
