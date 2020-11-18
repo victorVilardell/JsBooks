@@ -6,7 +6,11 @@
       @blur="isFocused = !isFocused"
     />
     <ul v-if="isFocused">
-      <li v-for="category in this.categoryFiltered" :key="category.category_id">
+      <li
+        v-for="category in this.categoryFiltered"
+        :key="category.category_id"
+        @click="selectCategory(category)"
+      >
         {{ category.name }}
       </li>
     </ul>
@@ -46,6 +50,9 @@ export default {
       } else {
         this.categoryFiltered = this.categories;
       }
+    },
+    selectCategory(category) {
+      this.selectedCategory = category.name;
     },
   },
 };
