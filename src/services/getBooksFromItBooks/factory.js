@@ -1,4 +1,4 @@
 import axios from "axios";
-import getBooksFromItBooks from "./factory";
+import getBooksFromItBooks from "./index";
 
 export default (category) => getBooksFromItBooks(axios, category);
