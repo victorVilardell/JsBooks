@@ -1,13 +1,12 @@
-import getBooksFromOpenLibra from "../getBooksFromOpenLibra";
-import getBooksFromItBooks from "../getBooksFromItBooks";
+import getBooksFromOpenLibra from "../getBooksFromOpenLibra/factory";
+import getBooksFromItBooks from "../getBooksFromItBooks/factory";
 import bookMapper from "../../utils/bookMapper";
 import resultsFormatData from "../../utils/resultsFormatData";
 
-export default (category) => {
+export default (category = "javascript") => {
   return Promise.allSettled([
     getBooksFromOpenLibra(category),
-    getBooksFromItBooks(),
-    getBooksFromItBooks(true)
+    getBooksFromItBooks(category)
   ])
     .then(resultsFormatData)
     .then(({ data, errors }) => ({
