@@ -1,4 +1,4 @@
-import getCategories from "../src/services/getCategories";
+import getCategories from "../../src/services/getCategories";
 
 describe("recover book categories", () => {
   it("method is called and the correct argument", async () => {

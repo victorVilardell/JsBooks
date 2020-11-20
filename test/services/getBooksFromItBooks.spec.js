@@ -1,4 +1,4 @@
-import getBooksFromItBooks from "../src/services/getBooksFromItBooks";
+import getBooksFromItBooks from "../../src/services/getBooksFromItBooks";
 
 describe("recover book from itBooks", () => {
   it("method is called and the correct arguments", async () => {

@@ -1,4 +1,4 @@
-import getBooksFromOpenLibra from "../src/services/getBooksFromOpenLibra";
+import getBooksFromOpenLibra from "../../src/services/getBooksFromOpenLibra";
 
 describe("recover book from OpenLibra", () => {
   it("method is called and the correct arguments", async () => {
