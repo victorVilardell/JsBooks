@@ -8,7 +8,10 @@
       <div class="content-data">
         <hgroup>
           <h3>{{ book.title }}</h3>
-          <img :src="`./assets/${book.language}.svg`" :alt="book.language" />
+          <img
+            :src="`./assets/language/${book.language}.svg`"
+            :alt="book.language"
+          />
         </hgroup>
         <p class="author">{{ book.author }}</p>
         <section>

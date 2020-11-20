@@ -3,9 +3,9 @@ import getBooksFromItBooks from "../getBooksFromItBooks";
 import bookMapper from "../../utils/bookMapper";
 import resultsFormatData from "../../utils/resultsFormatData";
 
-export default () => {
+export default (category) => {
   return Promise.allSettled([
-    getBooksFromOpenLibra(),
+    getBooksFromOpenLibra(category),
     getBooksFromItBooks(),
     getBooksFromItBooks(true)
   ])

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default () =>
+export default (category) =>
   axios
-    .get(`https://www.etnassoft.com/api/v1/get/?keyword=javascript`)
+    .get(`https://www.etnassoft.com/api/v1/get/?keyword=${category}`)
     .catch((error) => {
       throw error;
     });

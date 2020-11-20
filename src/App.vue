@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <CategoriesSelector :categories="this.categories" />
+    <CategoriesSelector
+      :categories="categories"
+      :category-selected="getBooks"
+    />
     <BuilderList v-if="hasBooks" :books="books" />
     <Loader v-else />
     <pre v-if="errors.length">
@@ -12,7 +15,7 @@
 <script>
 import BuilderList from "./components/BuilderList";
 import getBooksFromAllLibreries from "./services/getBooksFromAllLibreries";
-import getCategories from "./services/getCategories";
+import getCategories from "./services/getCategories/factory";
 import CategoriesSelector from "./components/CategoriesSelector";
 import Loader from "./components/Loader";
 
@@ -43,12 +46,12 @@ export default {
   async created() {
     await this.getBooks();
     const respondeCategories = await getCategories();
+    console.log(respondeCategories);
     this.categories = respondeCategories.data;
-    console.log(this.categories);
   },
   methods: {
-    async getBooks() {
-      const { data, errors } = await getBooksFromAllLibreries();
+    async getBooks(category = "javascript") {
+      const { data, errors } = await getBooksFromAllLibreries(category);
       if (data) {
         this.books = data;
       }

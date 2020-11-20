@@ -1,18 +1,13 @@
 <template>
   <div>
-    <input
-      v-model="selectedCategory"
-      @focus="isFocused = !isFocused"
-      @blur="isFocused = !isFocused"
-    />
+    <input v-model="selectedCategory" @focus="isFocused = !isFocused" />
     <ul v-if="isFocused">
       <li
         v-for="category in this.categoryFiltered"
         :key="category.category_id"
         @click="selectCategory(category)"
-      >
-        {{ category.name }}
-      </li>
+        v-html="category.name"
+      ></li>
     </ul>
   </div>
 </template>
@@ -42,17 +37,24 @@ export default {
   },
   methods: {
     filterInCategories(input) {
-      console.log(input);
       if (input.length > 0) {
-        this.categoryFiltered = this.categories.filter((category) =>
-          category.name.toLowerCase().includes(input.toLowerCase())
-        );
+        this.categoryFiltered = this.categories
+          .filter((category) =>
+            category.name.toLowerCase().includes(input.toLowerCase())
+          )
+          .map((category) => ({
+            category_id: category.category_id,
+            name: category.name.replace(input, `<b>${input}</b>`),
+            nicename: category.nicename,
+          }));
       } else {
         this.categoryFiltered = this.categories;
       }
     },
     selectCategory(category) {
+      this.$emit("category-selected", category);
       this.selectedCategory = category.name;
+      this.isFocused = false;
     },
   },
 };
