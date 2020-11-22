@@ -2,9 +2,9 @@
   <div id="app">
     <CategoriesSelector
       :categories="categories"
-      :category-selected="getBooks"
+      v-on:category-selected="getBooks"
     />
-    <BuilderList v-if="hasBooks" :books="books" />
+    <BuilderList v-if="hasBooks" :categoryInit="category" :books="books" />
     <Loader v-else />
     <pre v-if="errors.length">
       {{ JSON.stringify(errors, null, 2) }}
@@ -28,6 +28,7 @@ export default {
   },
   data() {
     return {
+      category: "",
       books: [],
       errors: [],
       categories: [],
@@ -50,8 +51,11 @@ export default {
     this.categories = respondeCategories.data;
   },
   methods: {
-    async getBooks(category = "javascript") {
-      const { data, errors } = await getBooksFromAllLibreries(category);
+    async getBooks(category = { name: "all", nicename: "all" }) {
+      this.category = category.name;
+      const { data, errors } = await getBooksFromAllLibreries(
+        category.nicename
+      );
       if (data) {
         this.books = data;
       }
