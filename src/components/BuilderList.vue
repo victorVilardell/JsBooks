@@ -17,7 +17,15 @@
         <section>
           <p class="categories">Categories:</p>
           <ul>
-            <li v-for="category in book.categories" :key="category.catefory_id">
+            <li
+              v-for="category in book.categories"
+              :class="{
+                categorySelected: category.name
+                  .toLowerCase()
+                  .includes(categoryInit.toLowerCase()),
+              }"
+              :key="category.catefory_id"
+            >
               {{ category.name }}
             </li>
           </ul>
@@ -33,6 +41,7 @@ export default {
   name: "BuilderList",
   props: {
     books: Array,
+    categoryInit: String,
   },
 };
 </script>
@@ -68,6 +77,9 @@ ul {
 li {
   font-size: 12px;
 }
+.categorySelected {
+  font-weight: bold;
+}
 figure {
   width: 20%;
   position: relative;
@@ -101,6 +113,7 @@ hgroup {
 }
 hgroup img {
   margin-left: 10px;
+  width: 20px;
 }
 blockquote {
   display: none;

@@ -52,12 +52,13 @@ export default {
   },
   methods: {
     async getBooks(category = { name: "all", nicename: "all" }) {
-      this.category = category.name;
+      this.books = [];
       const { data, errors } = await getBooksFromAllLibreries(
         category.nicename
       );
       if (data) {
         this.books = data;
+        this.category = category.name;
       }
       this.errors = errors;
     },

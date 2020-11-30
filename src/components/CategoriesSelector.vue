@@ -38,20 +38,15 @@ export default {
   methods: {
     filterInCategories(input) {
       if (input.length > 0) {
-        this.categoryFiltered = this.categories
-          .filter((category) =>
-            category.name.toLowerCase().includes(input.toLowerCase())
-          )
-          .map((category) => ({
-            category_id: category.category_id,
-            name: category.name.replace(input, `<b>${input}</b>`),
-            nicename: category.nicename,
-          }));
+        this.categoryFiltered = this.categories.filter((category) =>
+          category.name.toLowerCase().includes(input.toLowerCase())
+        );
       } else {
         this.categoryFiltered = this.categories;
       }
     },
     selectCategory(category) {
+      console.log(category);
       this.$emit("category-selected", category);
       this.selectedCategory = category.name;
       this.isFocused = false;
