@@ -1,14 +1,15 @@
 <template>
-  <div id="app">
-    <CategoriesSelector
-      :categories="categories"
-      v-on:category-selected="getBooks"
-    />
+  <div id="app" class="grid-container">
+    <Header />
+    {{ stateCategory }}
+    <Filters :categories="categories" v-on:category-selected="getBooks">
+    </Filters>
+
     <BuilderList v-if="hasBooks" :categoryInit="category" :books="books" />
     <Loader v-else />
-    <pre v-if="errors.length">
+    <!--<pre v-if="errors.length">
       {{ JSON.stringify(errors, null, 2) }}
-    </pre>
+    </pre>-->
   </div>
 </template>
 
@@ -16,15 +17,18 @@
 import BuilderList from "./components/BuilderList";
 import getBooksFromAllLibreries from "./services/getBooksFromAllLibreries";
 import getCategories from "./services/getCategories/factory";
-import CategoriesSelector from "./components/CategoriesSelector";
+
 import Loader from "./components/Loader";
+import Header from "./components/Header";
+import Filters from "./components/Filters";
 
 export default {
   name: "App",
   components: {
     BuilderList,
     Loader,
-    CategoriesSelector,
+    Header,
+    Filters,
   },
   data() {
     return {
@@ -43,12 +47,24 @@ export default {
     hasBooks() {
       return this.books.length > 0;
     },
+    stateCategory() {
+      return this.$store.state.category;
+    },
   },
   async created() {
     await this.getBooks();
     const respondeCategories = await getCategories();
-    console.log(respondeCategories);
     this.categories = respondeCategories.data;
+
+    this.categoriesWatch = this.$store.watch(
+      (state, getters) => getters.category,
+      (newValue, oldValue) => {
+        newValue !== oldValue && this.getBooks(newValue);
+      }
+    );
+  },
+  beforeDestroy() {
+    this.categoriesWatch();
   },
   methods: {
     async getBooks(category = { name: "all", nicename: "all" }) {
@@ -67,11 +83,35 @@ export default {
 </script>
 
 <style>
-#app {
+.grid-container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #999;
   margin-top: 60px;
+}
+.header {
+  background-color: red;
+  grid-column: 2 / 12;
+  grid-row: 1 / 2;
+}
+.filters {
+  grid-column: 2 / 12;
+  grid-row: 2 / 3;
+}
+.main {
+  background-color: blue;
+  grid-column: 2 / 9;
+  grid-row: 3 / 4;
+}
+.aside {
+  background-color: purple;
+  grid-column: 9 /12;
+  grid-row: 3 /4;
+}
+.footer {
+  background-color: orange;
+  grid-column: 2 / 12;
+  grid-row: 4 / 5;
 }
 </style>

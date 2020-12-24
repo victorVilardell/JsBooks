@@ -1,5 +1,4 @@
 export default (results) => {
-  console.log(results);
   return results.reduce(
     (response, result) => {
       if (result.status === "fulfilled") {

@@ -46,8 +46,7 @@ export default {
       }
     },
     selectCategory(category) {
-      console.log(category);
-      this.$emit("category-selected", category);
+      this.$store.dispatch("setCategory", category);
       this.selectedCategory = category.name;
       this.isFocused = false;
     },
