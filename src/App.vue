@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="grid-container">
     <Header />
-    {{ stateCategory }}
     <Filters :categories="categories" v-on:category-selected="getBooks">
     </Filters>
 

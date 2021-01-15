@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <img src="./assets/three-dots.svg" alt="loader" />
-  </div>
+  <div><img src="./assets/three-dots.svg" alt="loader" /></div>
 </template>
 
 <script>
